@@ -340,7 +340,7 @@ def init_devices():
 def init_isy():
     global myisy
 
-    myisy = ISY.Isy(addr="10.0.1.19", userp="", userl="admin", eventupdates=1)
+    myisy = ISY.Isy(addr="10.0.1.19", userp="ErgoFlat91", userl="admin", eventupdates=1)
 
 def init_events():
     global isy_event
