@@ -1,9 +1,16 @@
 import sys, time, mcp
 from daemon import Daemon
+import traceback
 
 class MyDaemon(Daemon):
 	def run(self):
-            mcp.daemon_main(self)
+            while True:
+                try:
+                    mcp.daemon_main(self)
+                except:
+                    sys.stderr.write( traceback.format_exc()+"\n")
+                    sys.stderr.write( "Crashed, waiting and then restarting\n")
+                    time.sleep(60)
 
 if __name__ == "__main__":
 	daemon = MyDaemon('/home/root/mcp/mcp.pid')
