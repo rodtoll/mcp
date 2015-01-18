@@ -141,14 +141,16 @@ def is_state_sensing(state_to_check):
         return False
 
 def send_text(text_contents):
+    global config
+
     # Your Account Sid and Auth Token from twilio.com/user/account
-    account_sid = "AC20dc1eefe4b9c9f69a0e1d9c97528d9d"
-    auth_token  = "21796b6f1c8c78f7453ad42d47df0a95"
+    account_sid = config["textcreds"]["accountsid"]
+    auth_token  = config["textcreds"]["authtoken"]
     client = TwilioRestClient(account_sid, auth_token)
  
     message = client.messages.create(body=text_contents,
-        to="+14254459180",    # Replace with your phone number
-        from_="+18168655709") # Replace with your Twilio number
+        to=config["textcreds"]["targetnumber"],    # Replace with your phone number
+        from_=config["textcreds"]["sourcenumber"]) # Replace with your Twilio number
 
 def handle_house_major_state_change(new_state):
     log("Handling major state change to: "+state_as_string(new_state))
